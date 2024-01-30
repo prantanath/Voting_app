@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="center-box">
+    <h2>Welcome to the Admin Dashboard</h2>
+    <!-- Add admin-specific content here -->
+    <a href="{% url 'register' %}">Create Employee</a>
+    <a href="">Create Restaurant</a>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</div>
+{% endblock %}
