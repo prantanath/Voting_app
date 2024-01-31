@@ -4,8 +4,13 @@
     <div class="center-box">
     <h2>Welcome to the Admin Dashboard</h2>
     <!-- Add admin-specific content here -->
+    <ul>
+        {% for restaurant in restaurants %}
+            <li><a href="{% url 'add_menu' restaurant.id %}">{{ restaurant.name }}</a></li>
+        {% endfor %}
+    </ul>
     <a href="{% url 'register' %}">Create Employee</a>
-    <a href="">Create Restaurant</a>
+    <a href="{% url 'create-restaurant' %}">Create Restaurant</a>
     <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit">Logout</button>

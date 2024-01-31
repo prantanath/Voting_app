@@ -28,8 +28,8 @@ def login_view(request):
             if user!=None:
                 login(request,user)
                 if user.is_superuser==True:
-                    return render(request,'admindashboard.html')
-                return render(request,'base.html')
+                    return redirect('admin_dashboard')
+                return redirect('user_dashboard')
         else:
             return render(request,'home.html',{'form':form})
     form=UserAuthenticationForm()
