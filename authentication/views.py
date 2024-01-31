@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import user_passes_test
-
+from .models import Employee
 
 from .forms import UserAuthenticationForm,UserRegisterationForm
 #regestering user through admin
@@ -38,3 +38,9 @@ def login_view(request):
 def user_logout(request):
     logout(request)
     return redirect('/')
+
+@user_passes_test(lambda u: u.is_superuser)
+def delete_employee(request,id):
+    employee = Employee.objects.get(id=id)
+    employee.delete()
+    return redirect('admin_dashboard')

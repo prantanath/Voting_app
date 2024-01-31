@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class='center-box'>
+    <h2>Results</h2>
+    {% if winner %}
+        <h3>Winner: {{ winner.restaurant.name }}</h3>
+    {% else %}
+        <h3>No winner found.</h3>
+    {% endif %}
+</div>
+{% endblock %}

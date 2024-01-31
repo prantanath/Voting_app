@@ -9,4 +9,5 @@ urlpatterns = [
      path('logout',user_logout,name="logout"),
      path('admin_dashboard',admin_dashboard,name="admin_dashboard"),
      path('user_dashboard',user_dashboard,name="user_dashboard"),
+     path('delete-employee/<id>',delete_employee,name="delete-employee"),
 ]
