@@ -2,10 +2,11 @@
 
 {% block content %}
 <br>
-<div class='center-box'>
+<div class='text-center'>
     <h2>Results</h2>
     {% if winner %}
-        <h3>Winner: {{ winner.restaurant.name }}</h3>
+        <h5>Winner Menu: {{winner.name}} </h5>
+        <h5>Winner Restaurant: {{ winner.restaurant.name }}</h5>
     {% else %}
         <h3>No winner found.</h3>
     {% endif %}

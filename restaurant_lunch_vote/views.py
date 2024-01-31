@@ -80,12 +80,13 @@ def delete_restaurant(request,id):
 def show_results(request):
     try:
         # Getting the date of three days ago
-        three_days_ago = date.today() - timedelta(days=2)
         todays_list = Menu.objects.filter(date=date.today()).annotate(vote_count=Count('vote')).order_by('-vote_count')
         winners_list = []
-        print(todays_list[0])
-        for day in range(2):
-            current_day = three_days_ago + timedelta(days=day)
+        for day in range(1,3):
+            current_day = date.today() - timedelta(days=day)
+            #skiping weekend (Saturday and Sunday)
+            while current_day.weekday() in [5, 6]:
+                current_day -= timedelta(days=1)
             winner = Menu.objects.filter(date=current_day).annotate(vote_count=Count('vote')).order_by('-vote_count').first()
             if winner is not None:
                 winners_list.append(winner)
