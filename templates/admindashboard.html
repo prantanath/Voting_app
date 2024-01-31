@@ -1,19 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="center-box">
     <h2>Welcome to the Admin Dashboard</h2>
-    <!-- Add admin-specific content here -->
-    <ul>
-        {% for restaurant in restaurants %}
-            <li><a href="{% url 'add_menu' restaurant.id %}">{{ restaurant.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="container mt-3">
+    <div class="row">
+    <div class="col-md-6">
     <a href="{% url 'register' %}">Create Employee</a>
     <a href="{% url 'create-restaurant' %}">Create Restaurant</a>
     <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit">Logout</button>
     </form>
-</div>
+    </div>
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Restaurant Name</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for restaurant in restaurants %}
+                  <tr>
+                    <th scope="row"><a href="{% url 'add_menu' restaurant.id %}">{{ restaurant.name }}</a></th>
+                    <td><a
+                        type="button"
+                        href="restaurants/delete-restaurant/{{restaurant.id}}"
+                        class="btn btn-danger"
+                    >
+                        Delete
+                    </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+    </div>
 {% endblock %}

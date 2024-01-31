@@ -11,8 +11,8 @@ def register_view(request):
         form=UserRegisterationForm(request.POST,request.FILES)
         if form.is_valid():
             user=form.save() 
-            login(request,user)
-            return redirect('/')
+            # login(request,user)
+            return redirect('admin_dashboard')
         else:
             return render(request,'register.html',{'f':form})
     form=UserRegisterationForm()

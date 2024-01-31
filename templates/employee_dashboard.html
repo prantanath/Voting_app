@@ -2,11 +2,32 @@
 
 {% block content %}
 <h2>Welcome to Your Dashboard, {{ request.user.name }}!</h2>    <h3>Menus for Today</h3>
-    <ul>
-        {% for menu in menus %}
-            <li>
-                <strong>{{ menu.name }}</strong> - {{ menu.description }} - {{ menu.restaurant.name }}
-            </li>
-        {% endfor %}
-    </ul>
+<div >
+    <form method="post" action="{% url 'vote' %}">
+        {% csrf_token %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Menu Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Restaurant</th>
+                <th scope="col">Votes</th>
+                <th scope="col">Vote</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for menu in menus %}
+                  <tr>
+                    <th scope="row">{{menu.name}}</th>
+                    <td>{{menu.description}}</td>
+                    <td>{{menu.restaurant.name}}</td>
+                    <td>{{menu.vote_count}}</td>
+                    <td><input type="radio" name="menu_id" value="{{ menu.id }}"></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+        <button class="btn btn-primary" type="submit">Vote</button>
+    </form>
+</div>
 {% endblock %}
